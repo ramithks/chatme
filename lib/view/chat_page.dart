@@ -129,7 +129,7 @@ class MessageInput extends StatelessWidget {
             child: TextField(
               controller: messageController,
               decoration: InputDecoration(
-                hintText: 'Type a message...',
+                hintText: 'type_message'.tr,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),

@@ -1,4 +1,5 @@
 import 'package:chatme/firebase_options.dart';
+import 'package:chatme/translations/app_translations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
       ),
       getPages: Routes.routes,
       debugShowCheckedModeBanner: false,
+      translations: AppTranslations(),
+      locale: Get.deviceLocale,
+      fallbackLocale: const Locale('en', 'US'),
     );
   }
 }

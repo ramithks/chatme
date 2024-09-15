@@ -1,5 +1,3 @@
-
-// Update home.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:chatme/controller/auth_controller.dart';
@@ -16,11 +14,26 @@ class Home extends StatelessWidget {
   final userController = Get.find<UserController>();
   final chatController = Get.find<ChatController>();
 
+  void _changeLanguage(String languageCode) {
+    Locale locale;
+    switch (languageCode) {
+      case 'en':
+        locale = const Locale('en', 'US');
+        break;
+      case 'ar':
+        locale = const Locale('ar', 'SA');
+        break;
+      default:
+        locale = const Locale('en', 'US');
+    }
+    Get.updateLocale(locale);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => Text('Welcome ${userController.user.name}')),
+        title: Obx(() => Text('${'welcome'.tr} ${userController.user.name}')),
         centerTitle: true,
         actions: [
           IconButton(
@@ -28,6 +41,20 @@ class Home extends StatelessWidget {
             onPressed: () {
               Get.to(() => SearchUsersPage());
             },
+          ),
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.language),
+            onSelected: _changeLanguage,
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              PopupMenuItem<String>(
+                value: 'en',
+                child: Text('english'.tr),
+              ),
+              PopupMenuItem<String>(
+                value: 'ar',
+                child: Text('arabic'.tr),
+              ),
+            ],
           ),
           IconButton(
             icon: const Icon(Icons.exit_to_app),
@@ -47,7 +74,7 @@ class Home extends StatelessWidget {
                   child: Text(chat.name![0].toUpperCase()),
                 ),
                 title: Text(chat.name!),
-                subtitle: Text(chat.lastMessage ?? 'No messages yet'),
+                subtitle: Text(chat.lastMessage ?? 'no_messages'.tr),
                 onTap: () {
                   Get.to(() => ChatPage(receiver: chat));
                 },
@@ -56,9 +83,9 @@ class Home extends StatelessWidget {
           )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => MapPage());
+          Get.to(() => const MapPage());
         },
-        child: Icon(Icons.map),
+        child: const Icon(Icons.map),
       ),
     );
   }

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:chatme/controller/auth_controller.dart';
@@ -9,7 +10,6 @@ class Login extends StatelessWidget {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
   final _authController = Get.find<AuthController>();
 
   @override
@@ -20,7 +20,7 @@ class Login extends StatelessWidget {
       }
       return Scaffold(
         appBar: AppBar(
-          title: const Text("Login"),
+          title: Text('login'.tr),
         ),
         body: SingleChildScrollView(
           child: Center(
@@ -30,38 +30,32 @@ class Login extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   TextFormField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'email',
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText: 'email'.tr,
                     ),
                     controller: _emailController,
                   ),
-                  const SizedBox(
-                    height: 40,
-                  ),
+                  const SizedBox(height: 40),
                   TextFormField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'password',
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText: 'password'.tr,
                     ),
                     controller: _passwordController,
                     obscureText: true,
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
+                  const SizedBox(height: 30),
                   ElevatedButton(
-                    child: const Text("Log In"),
+                    child: Text('log_in'.tr),
                     onPressed: () async {
                       _authController.login(
                           _emailController.text, _passwordController.text);
                     },
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
+                  const SizedBox(height: 30),
                   TextButton(
-                    child: const Text("Sign Up"),
+                    child: Text('sign_up'.tr),
                     onPressed: () {
                       Get.to(const SignUp());
                     },

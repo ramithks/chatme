@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:chatme/controller/auth_controller.dart';
@@ -14,8 +15,7 @@ class SignUpState extends State<SignUp> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
 
   final AuthController controller = Get.find<AuthController>();
@@ -37,7 +37,7 @@ class SignUpState extends State<SignUp> {
       countries = await countryService.getCountries();
       setState(() {});
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load countries');
+      Get.snackbar('error'.tr, 'failed_load_countries'.tr);
     }
   }
 
@@ -54,7 +54,7 @@ class SignUpState extends State<SignUp> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Sign Up"),
+        title: Text('sign_up'.tr),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -65,67 +65,67 @@ class SignUpState extends State<SignUp> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Full name',
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    hintText: 'full_name'.tr,
                   ),
                   controller: nameController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your full name';
+                      return 'please_enter_full_name'.tr;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Email',
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    hintText: 'email'.tr,
                   ),
                   controller: emailController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
+                      return 'please_enter_email'.tr;
                     }
                     if (!isValidEmail(value)) {
-                      return 'Please enter a valid email';
+                      return 'please_enter_valid_email'.tr;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Password',
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    hintText: 'password'.tr,
                   ),
                   obscureText: true,
                   controller: passwordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter a password';
+                      return 'please_enter_password'.tr;
                     }
                     if (value.length < 6) {
-                      return 'Password must be at least 6 characters long';
+                      return 'password_min_length'.tr;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Confirm Password',
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    hintText: 'confirm_password'.tr,
                   ),
                   obscureText: true,
                   controller: confirmPasswordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please confirm your password';
+                      return 'please_confirm_password'.tr;
                     }
                     if (value != passwordController.text) {
-                      return 'Passwords do not match';
+                      return 'passwords_do_not_match'.tr;
                     }
                     return null;
                   },
@@ -135,9 +135,9 @@ class SignUpState extends State<SignUp> {
                   width: double.infinity,
                   child: DropdownButtonFormField<String>(
                     isExpanded: true,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Select Country',
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText: 'select_country'.tr,
                     ),
                     value: selectedCountry,
                     items: countries.map((country) {
@@ -156,7 +156,7 @@ class SignUpState extends State<SignUp> {
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please select a country';
+                        return 'please_select_country'.tr;
                       }
                       return null;
                     },
@@ -164,25 +164,25 @@ class SignUpState extends State<SignUp> {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Mobile Number',
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    hintText: 'mobile_number'.tr,
                   ),
                   controller: mobileController,
                   keyboardType: TextInputType.phone,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your mobile number';
+                      return 'please_enter_mobile'.tr;
                     }
                     if (!isValidMobile(value)) {
-                      return 'Please enter a valid mobile number';
+                      return 'please_enter_valid_mobile'.tr;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  child: const Text("Sign Up"),
+                  child: Text('sign_up'.tr),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       controller.createUser(

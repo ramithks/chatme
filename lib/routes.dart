@@ -7,6 +7,7 @@ import 'package:chatme/view/map_page.dart';
 import 'package:chatme/model/user.dart';
 
 class Routes {
+  // ignore_for_file: constant_identifier_names
   static const LOGIN = '/';
   static const SIGNUP = '/signup';
   static const HOME = '/home';

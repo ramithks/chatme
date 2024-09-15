@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'dart:async';
 import 'dart:math';
 
 class MapPage extends StatefulWidget {
-  const MapPage({Key? key}) : super(key: key);
+  const MapPage({super.key});
 
   @override
-  _MapPageState createState() => _MapPageState();
+  MapPageState createState() => MapPageState();
 }
 
-class _MapPageState extends State<MapPage> {
-  Completer<GoogleMapController> _controller = Completer();
-  Set<Polygon> _polygons = {};
-  Set<Marker> _markers = {};
+class MapPageState extends State<MapPage> {
+  final Completer<GoogleMapController> _controller = Completer();
+  final Set<Polygon> _polygons = {};
+  final Set<Marker> _markers = {};
   LatLng? _currentPosition;
 
   @override
@@ -29,6 +30,7 @@ class _MapPageState extends State<MapPage> {
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
+      Get.snackbar('error'.tr, 'location_services_disabled'.tr);
       return;
     }
 
@@ -36,11 +38,13 @@ class _MapPageState extends State<MapPage> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
+        Get.snackbar('error'.tr, 'location_permission_denied'.tr);
         return;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
+      Get.snackbar('error'.tr, 'location_permission_permanently_denied'.tr);
       return;
     }
 
@@ -55,14 +59,13 @@ class _MapPageState extends State<MapPage> {
     if (_currentPosition != null) {
       _markers.add(
         Marker(
-          markerId: MarkerId('current_location'),
+          markerId: const MarkerId('current_location'),
           position: _currentPosition!,
         ),
       );
-
       _polygons.add(
         Polygon(
-          polygonId: PolygonId('area'),
+          polygonId: const PolygonId('area'),
           points: _createRectangle(_currentPosition!, 2000),
           fillColor: Colors.red.withOpacity(0.1),
           strokeColor: Colors.red,
@@ -99,10 +102,10 @@ class _MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Map'),
+        title: Text('map'.tr),
       ),
       body: _currentPosition == null
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : GoogleMap(
               mapType: MapType.normal,
               initialCameraPosition: CameraPosition(

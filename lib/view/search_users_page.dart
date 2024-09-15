@@ -12,7 +12,7 @@ class SearchUsersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search Users'),
+        title: Text('search_users'.tr),
       ),
       body: Column(
         children: <Widget>[
@@ -20,7 +20,7 @@ class SearchUsersPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               decoration: InputDecoration(
-                hintText: 'Search users...',
+                hintText: 'search_users_hint'.tr,
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -33,22 +33,22 @@ class SearchUsersPage extends StatelessWidget {
           ),
           Expanded(
             child: Obx(() => ListView.builder(
-              itemCount: chatController.searchResults.length,
-              itemBuilder: (context, index) {
-                final user = chatController.searchResults[index];
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    child: Text(user.name![0].toUpperCase()),
-                  ),
-                  title: Text(user.name ?? ''),
-                  subtitle: Text(user.email ?? ''),
-                  onTap: () {
-                    Get.to(() => ChatPage(receiver: user));
+                  itemCount: chatController.searchResults.length,
+                  itemBuilder: (context, index) {
+                    final user = chatController.searchResults[index];
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.blue,
+                        child: Text(user.name![0].toUpperCase()),
+                      ),
+                      title: Text(user.name ?? ''),
+                      subtitle: Text(user.email ?? ''),
+                      onTap: () {
+                        Get.to(() => ChatPage(receiver: user));
+                      },
+                    );
                   },
-                );
-              },
-            )),
+                )),
           ),
         ],
       ),
