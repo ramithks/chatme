@@ -62,10 +62,6 @@ lib/
 - QR code scanner for device token sharing is not implemented
 - Firebase Cloud Messaging for push notifications is not fully implemented, but OneSignal push notifications are available as an alternative
 
-## Contributing
-
-Contributions, issues, and feature requests are welcome. Feel free to check issues page if you want to contribute.
-
 ## Author
 
 Ramith K S
