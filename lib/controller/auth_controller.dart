@@ -21,14 +21,15 @@ class AuthController extends GetxController {
     super.onInit();
   }
 
-  void clear (){
-     _firebaseUser.value = null;
+  void clear() {
+    _firebaseUser.value = null;
   }
 
-  Future<void> createUser(String name, String email, String password) async {
+  Future<void> createUser(String name, String email, String password,
+      String country, String mobile) async {
     try {
       fauth.UserCredential authResult =
-          await authService.createUser(name, email, password);
+          await authService.createUser(email, password);
 
       if (authResult.user == null) {
         throw Exception('authResult.user == null');
@@ -40,6 +41,8 @@ class AuthController extends GetxController {
         id: authResult.user!.uid,
         name: name,
         email: authResult.user!.email,
+        country: country,
+        mobile: mobile,
       );
       final userController = Get.find<UserController>();
       if (await userController.createNewUser(user)) {

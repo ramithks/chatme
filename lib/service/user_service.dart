@@ -9,12 +9,9 @@ class UserService {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<bool> createNewUser(User user) async {
+ Future<bool> createNewUser(User user) async {
     try {
-      await _firestore.collection("users").doc(user.id).set({
-        "name": user.name,
-        "email": user.email,
-      });
+      await _firestore.collection("users").doc(user.id).set(user.toMap());
       return true;
     } catch (e) {
       if (kDebugMode) {

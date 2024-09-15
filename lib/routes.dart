@@ -21,7 +21,7 @@ class Routes {
     ),
     GetPage(
       name: SIGNUP,
-      page: () => SignUp(),
+      page: () => const SignUp(),
       transition: Transition.circularReveal,
     ),
     GetPage(

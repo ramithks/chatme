@@ -4,7 +4,7 @@ import 'package:chatme/controller/chat_controller.dart';
 import 'package:chatme/view/chat_page.dart';
 
 class SearchUsersPage extends StatelessWidget {
-  SearchUsersPage({Key? key}) : super(key: key);
+  SearchUsersPage({super.key});
 
   final chatController = Get.find<ChatController>();
 
@@ -12,7 +12,7 @@ class SearchUsersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Users'),
+        title: const Text('Search Users'),
       ),
       body: Column(
         children: <Widget>[
@@ -21,7 +21,7 @@ class SearchUsersPage extends StatelessWidget {
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Search users...',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

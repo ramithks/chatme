@@ -72,16 +72,15 @@ class MessageBubble extends StatelessWidget {
   final Message message;
   final bool isMe;
 
-  const MessageBubble({Key? key, required this.message, required this.isMe})
-      : super(key: key);
+  const MessageBubble({super.key, required this.message, required this.isMe});
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-        padding: EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: isMe ? Colors.blue : Colors.grey[300],
           borderRadius: BorderRadius.circular(15),
@@ -94,7 +93,7 @@ class MessageBubble extends StatelessWidget {
               message.content,
               style: TextStyle(color: isMe ? Colors.white : Colors.black),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(
               _formatTimestamp(message.timestamp),
               style: TextStyle(
@@ -118,8 +117,7 @@ class MessageInput extends StatelessWidget {
   final VoidCallback onSend;
 
   const MessageInput(
-      {Key? key, required this.messageController, required this.onSend})
-      : super(key: key);
+      {super.key, required this.messageController, required this.onSend});
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +137,7 @@ class MessageInput extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.send),
+            icon: const Icon(Icons.send),
             onPressed: onSend,
           ),
         ],

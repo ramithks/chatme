@@ -11,16 +11,16 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await InitialBinding().dependencies();
-  runApp( const MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-   const MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp (
-     initialBinding: InitialBinding(),
+    return GetMaterialApp(
+      initialBinding: InitialBinding(),
       initialRoute: Routes.LOGIN,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

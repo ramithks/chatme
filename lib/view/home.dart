@@ -7,7 +7,7 @@ import 'package:chatme/view/chat_page.dart';
 import 'package:chatme/view/search_users_page.dart';
 
 class Home extends StatelessWidget {
-  Home({Key? key}) : super(key: key);
+  Home({super.key});
 
   final authController = Get.find<AuthController>();
   final userController = Get.find<UserController>();

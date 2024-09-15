@@ -63,7 +63,7 @@ class Login extends StatelessWidget {
                   TextButton(
                     child: const Text("Sign Up"),
                     onPressed: () {
-                      Get.to(SignUp());
+                      Get.to(const SignUp());
                     },
                   )
                 ],
