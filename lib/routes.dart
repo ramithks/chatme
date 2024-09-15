@@ -1,10 +1,9 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:get/get.dart';
 import 'package:chatme/view/home.dart';
 import 'package:chatme/view/login.dart';
 import 'package:chatme/view/signup.dart';
 import 'package:chatme/view/chat_page.dart';
+import 'package:chatme/view/map_page.dart';
 import 'package:chatme/model/user.dart';
 
 class Routes {
@@ -12,6 +11,7 @@ class Routes {
   static const SIGNUP = '/signup';
   static const HOME = '/home';
   static const CHAT = '/chat';
+  static const MAP = '/map';
 
   static final routes = [
     GetPage(
@@ -32,6 +32,11 @@ class Routes {
     GetPage(
       name: CHAT,
       page: () => ChatPage(receiver: Get.arguments as User),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: MAP,
+      page: () => const MapPage(),
       transition: Transition.rightToLeft,
     ),
   ];

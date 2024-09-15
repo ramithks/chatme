@@ -1,3 +1,5 @@
+
+// Update home.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:chatme/controller/auth_controller.dart';
@@ -5,6 +7,7 @@ import 'package:chatme/controller/user_controller.dart';
 import 'package:chatme/controller/chat_controller.dart';
 import 'package:chatme/view/chat_page.dart';
 import 'package:chatme/view/search_users_page.dart';
+import 'package:chatme/view/map_page.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -51,6 +54,12 @@ class Home extends StatelessWidget {
               );
             },
           )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(() => MapPage());
+        },
+        child: Icon(Icons.map),
+      ),
     );
   }
 }
