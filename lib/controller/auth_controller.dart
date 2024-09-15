@@ -13,16 +13,18 @@ class AuthController extends GetxController {
   final Rx<fauth.User?> _firebaseUser =
       Rx<fauth.User?>(fauth.FirebaseAuth.instance.currentUser);
 
+  final Rx<fauth.User?> userRx = Rx<fauth.User?>(null);
+
   fauth.User? get user => _firebaseUser.value;
 
   @override
-  onInit() {
-    _firebaseUser.bindStream(authService.authStateChanges());
+  void onInit() {
+    userRx.bindStream(authService.authStateChanges());
     super.onInit();
   }
 
   void clear() {
-    _firebaseUser.value = null;
+    userRx.value = null;
   }
 
   Future<void> createUser(String name, String email, String password,

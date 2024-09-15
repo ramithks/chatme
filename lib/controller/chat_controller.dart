@@ -23,12 +23,21 @@ class ChatController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchRecentChats();
+    // Listen for changes in the auth state
+    ever(authController.userRx, (user) {
+      if (user != null) {
+        fetchRecentChats();
+      } else {
+        recentChats.clear();
+      }
+    });
   }
 
   void fetchRecentChats() async {
-    recentChats.value =
-        await chatService.getRecentChats(authController.user!.uid);
+    if (authController.user != null) {
+      recentChats.value =
+          await chatService.getRecentChats(authController.user!.uid);
+    }
   }
 
   void searchUsers(String query) async {
