@@ -57,11 +57,6 @@ lib/
 - iOS
 - Web
 
-## Known Issues and Future Improvements
-
-- QR code scanner for device token sharing is not implemented
-- Firebase Cloud Messaging for push notifications is not fully implemented, but OneSignal push notifications are available as an alternative
-
 ## Author
 
 Ramith K S
