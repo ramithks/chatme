@@ -41,48 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBUZ0oM1u7HBLFFOCB6dPTvL4aPLNAJLi8',
-    appId: '1:110471224412:web:d6acabce7bf6683dd95a99',
-    messagingSenderId: '110471224412',
-    projectId: 'chatme-2cd2b',
-    authDomain: 'chatme-2cd2b.firebaseapp.com',
-    storageBucket: 'chatme-2cd2b.appspot.com',
-    measurementId: 'G-ZP0BBVRJH6',
+    apiKey: '',
+    appId: '',
+    messagingSenderId: '',
+    projectId: '',
+    authDomain: '',
+    storageBucket: '',
+    measurementId: '',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBfDS2klH7XKmD_KiPrJe-4r6mSDheu6VE',
-    appId: '1:110471224412:android:4a20fa2383e24c40d95a99',
-    messagingSenderId: '110471224412',
-    projectId: 'chatme-2cd2b',
-    storageBucket: 'chatme-2cd2b.appspot.com',
+    apiKey: '',
+    appId: '',
+    messagingSenderId: '',
+    projectId: '',
+    storageBucket: '',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDmy39o_GXLOIkf-Kox5ULeRZOAaDXTxrU',
-    appId: '1:110471224412:ios:0b6f7a0a7dfa0442d95a99',
-    messagingSenderId: '110471224412',
-    projectId: 'chatme-2cd2b',
-    storageBucket: 'chatme-2cd2b.appspot.com',
-    iosBundleId: 'com.example.chatme',
+    apiKey: '',
+    appId: '',
+    messagingSenderId: '',
+    projectId: '',
+    storageBucket: '',
+    iosBundleId: '',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDmy39o_GXLOIkf-Kox5ULeRZOAaDXTxrU',
-    appId: '1:110471224412:ios:0b6f7a0a7dfa0442d95a99',
-    messagingSenderId: '110471224412',
-    projectId: 'chatme-2cd2b',
-    storageBucket: 'chatme-2cd2b.appspot.com',
-    iosBundleId: 'com.example.chatme',
+    apiKey: '',
+    appId: '',
+    messagingSenderId: '',
+    projectId: '',
+    storageBucket: '',
+    iosBundleId: '',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBUZ0oM1u7HBLFFOCB6dPTvL4aPLNAJLi8',
-    appId: '1:110471224412:web:e00772aa11c6c462d95a99',
-    messagingSenderId: '110471224412',
-    projectId: 'chatme-2cd2b',
-    authDomain: 'chatme-2cd2b.firebaseapp.com',
-    storageBucket: 'chatme-2cd2b.appspot.com',
-    measurementId: 'G-RRNR87RQV9',
+    apiKey: '',
+    appId: '',
+    messagingSenderId: '',
+    projectId: '',
+    authDomain: '',
+    storageBucket: '',
+    measurementId: '',
   );
 }
