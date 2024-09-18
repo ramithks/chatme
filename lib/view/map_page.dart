@@ -17,6 +17,7 @@ class MapPageState extends State<MapPage> {
   final Set<Polygon> _polygons = {};
   final Set<Marker> _markers = {};
   LatLng? _currentPosition;
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -24,35 +25,47 @@ class MapPageState extends State<MapPage> {
     _getCurrentLocation();
   }
 
-  void _getCurrentLocation() async {
+  Future<void> _getCurrentLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
 
+    // Check if location services are enabled
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      Get.snackbar('error'.tr, 'location_services_disabled'.tr);
+      setState(() => _isLoading = false);
+      Get.snackbar('Error', 'Location services are disabled');
       return;
     }
 
+    // Check location permission
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        Get.snackbar('error'.tr, 'location_permission_denied'.tr);
+        setState(() => _isLoading = false);
+        Get.snackbar('Error', 'Location permission denied');
         return;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      Get.snackbar('error'.tr, 'location_permission_permanently_denied'.tr);
+      setState(() => _isLoading = false);
+      Get.snackbar('Error', 'Location permission permanently denied');
       return;
     }
 
-    Position position = await Geolocator.getCurrentPosition();
-    setState(() {
-      _currentPosition = LatLng(position.latitude, position.longitude);
+    // Get current position
+    try {
+      Position position = await Geolocator.getCurrentPosition();
+      setState(() {
+        _currentPosition = LatLng(position.latitude, position.longitude);
+        _isLoading = false;
+      });
       _updateMap();
-    });
+    } catch (e) {
+      setState(() => _isLoading = false);
+      Get.snackbar('Error', 'Failed to get current location: $e');
+    }
   }
 
   void _updateMap() {
@@ -80,21 +93,17 @@ class MapPageState extends State<MapPage> {
     final double lat = center.latitude * pi / 180;
     final double lon = center.longitude * pi / 180;
     final double distanceInRadians = radiusInMeters / earthRadius;
-
     final List<LatLng> corners = [];
 
     for (double bearing in [45, 135, 225, 315]) {
       final double bearingRad = bearing * pi / 180;
-
       final double lat2 = asin(sin(lat) * cos(distanceInRadians) +
           cos(lat) * sin(distanceInRadians) * cos(bearingRad));
       final double lon2 = lon +
           atan2(sin(bearingRad) * sin(distanceInRadians) * cos(lat),
               cos(distanceInRadians) - sin(lat) * sin(lat2));
-
       corners.add(LatLng(lat2 * 180 / pi, lon2 * 180 / pi));
     }
-
     return corners;
   }
 
@@ -102,24 +111,26 @@ class MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('map'.tr),
+        title: const Text('Map'),
       ),
-      body: _currentPosition == null
+      body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : GoogleMap(
-              mapType: MapType.normal,
-              initialCameraPosition: CameraPosition(
-                target: _currentPosition!,
-                zoom: 14,
-              ),
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-              markers: _markers,
-              polygons: _polygons,
-            ),
+          : _currentPosition == null
+              ? const Center(child: Text('Unable to get location'))
+              : GoogleMap(
+                  mapType: MapType.normal,
+                  initialCameraPosition: CameraPosition(
+                    target: _currentPosition!,
+                    zoom: 14,
+                  ),
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: true,
+                  markers: _markers,
+                  polygons: _polygons,
+                ),
     );
   }
 }
